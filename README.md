@@ -9,3 +9,12 @@ ACESSANDO DIRETORIO DO INSTALADOR & INICIANDO INSTALAÇÕES ADICIONAIS (USAR EST
 cd && cd ./install && sudo ./install_instancia
 ```
 
+Criar chave para fazer o clone de repositório privado:
+
+```bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+cat ~/.ssh/id_ed25519.pub (copia o conteudo)
+adiciona aqui, https://github.com/settings/keys
+```
