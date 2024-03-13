@@ -18,3 +18,12 @@ ssh-add ~/.ssh/id_ed25519
 cat ~/.ssh/id_ed25519.pub (copia o conteudo)
 adiciona aqui, https://github.com/settings/keys
 ```
+
+Acesso o sistema pela primeira vez:
+
+```bash
+https://chatbot.dominio.com.br
+
+login: admin@admin.com
+senha: 123456
+```
