@@ -5,7 +5,7 @@ sudo apt install -y git && git clone https://github.com/AutoAtende/aa-max-instal
 ```
 
 ```bash
-sudo apt install -y git && git clone https://github.com/AutoAtende/aa-max-install.git install && sudo chmod -R 777 ./install && cd ./install && sudo ./install_primaria
+sudo apt install -y git && git clone https://github.com/edielson/whaticket-myrouter-install.git install && sudo chmod -R 777 ./install && cd ./install && sudo ./install_primaria
 ```
 
 
