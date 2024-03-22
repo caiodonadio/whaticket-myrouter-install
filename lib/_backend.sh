@@ -87,7 +87,6 @@ GERENCIANET_CLIENT_SECRET=sua_chave_secreta
 GERENCIANET_PIX_CERT=nome_do_certificado
 GERENCIANET_PIX_KEY=chave_pix_gerencianet
 
-VERIFY_TOKEN=Whaticket
 FACEBOOK_APP_ID=
 FACEBOOK_APP_SECRET=
 
