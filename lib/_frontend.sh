@@ -16,8 +16,7 @@ frontend_node_dependencies() {
 
   sudo su - deploy <<EOF
   cd /home/deploy/${instancia_add}/frontend
-  npm install
-  npm install express helmet express-rate-limit
+  npm install --force
 EOF
 
   sleep 2
@@ -60,8 +59,7 @@ frontend_update() {
   pm2 stop ${empresa_atualizar}-frontend
   git pull
   cd /home/deploy/${empresa_atualizar}/frontend
-  npm install
-  npm install express helmet express-rate-limit
+  npm install --force
   rm -rf build
   npm run build
   pm2 start ${empresa_atualizar}-frontend
@@ -114,40 +112,21 @@ EOF
 sudo su - deploy << EOF
   cat <<[-]EOF > /home/deploy/${instancia_add}/frontend/server.js
 const express = require("express");
-const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
 const path = require("path");
 
 const app = express();
 
-// Aplicar o Helmet para segurança básica
-app.use(helmet());
-
-// Limitador de taxa de requisições para prevenir ataques de força bruta e DDoS
-const limiter = rateLimit({
-	windowMs: 15 * 60 * 1000, // 15 minutos
-	max: 100, // limite cada IP a 100 requisições por janela (aqui definida em 15 minutos)
-	standardHeaders: true, // Retorna informações de limite de taxa nos cabeçalhos `RateLimit-*`
-	legacyHeaders: false, // Desabilita os cabeçalhos `X-RateLimit-*`
-});
-
-// Aplicar o limitador de taxa a todas as requisições
-app.use(limiter);
-
-// Servir arquivos estáticos de forma segura
 app.use(express.static(path.join(__dirname, "build"), {
 	dotfiles: 'deny', // Não permitir acesso a arquivos dotfiles
 	index: false, // Desabilitar listagem de diretório
 }));
 
-// Rota para servir o frontend
 app.get("/*", function (req, res) {
 	res.sendFile(path.join(__dirname, "build", "index.html"), {
 		dotfiles: 'deny', // Mesma regra para arquivos dotfiles aqui
 	});
 });
 
-// Iniciar o servidor
 const PORT = process.env.PORT || ${frontend_port};
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${frontend_port}`));
 
